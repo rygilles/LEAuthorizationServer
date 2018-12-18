@@ -1,0 +1,209 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json",
+    "text/plain"
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "description": "Use this application to handle ACME challenges.",
+    "title": "Let's Encrypt Authorization Server API.",
+    "termsOfService": "there are no TOS at this moment, use at your own risk we take no responsibility",
+    "contact": {
+      "name": "Ryan Gilles",
+      "email": "ryan@e-monsite.com"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "http://opensource.org/licenses/MIT"
+    },
+    "version": "0.0.1"
+  },
+  "host": "localhost:8000",
+  "basePath": "/",
+  "paths": {
+    "/.well-known/acme-challenge/{token}": {
+      "get": {
+        "description": "This will show the record of an identified challenge.",
+        "produces": [
+          "text/plain"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "challenges"
+        ],
+        "summary": "Show token matching challenge (ACME authorization check url).",
+        "operationId": "getChallengeValue",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Token",
+            "description": "The Token of a challenge",
+            "name": "token",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/challengeValueResponse"
+          },
+          "404": {
+            "$ref": "#/responses/jsonError"
+          }
+        }
+      }
+    },
+    "/challenge": {
+      "post": {
+        "description": "This will add a challenge record.",
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "challenges"
+        ],
+        "summary": "Insert a challenge.",
+        "operationId": "createChallenge",
+        "parameters": [
+          {
+            "description": "Challenge",
+            "name": "challenge",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/challenge"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "challengeResponse"
+          },
+          "404": {
+            "description": "jsonError"
+          }
+        }
+      }
+    },
+    "/challenge/{token}": {
+      "get": {
+        "description": "This will show the record of an identified challenge.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "challenges"
+        ],
+        "summary": "Show token matching challenge.",
+        "operationId": "getChallenge",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Token",
+            "description": "The Token of a challenge",
+            "name": "token",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/challengeResponse"
+          },
+          "404": {
+            "$ref": "#/responses/jsonError"
+          }
+        }
+      }
+    },
+    "/challenges": {
+      "get": {
+        "description": "This will show all recorded challenges.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "challenges"
+        ],
+        "summary": "Lists all challenges.",
+        "operationId": "listChallenges",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/challengesResponse"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "challenge": {
+      "type": "object",
+      "title": "Challenge description.",
+      "required": [
+        "token",
+        "value"
+      ],
+      "properties": {
+        "token": {
+          "description": "Token of the challenge",
+          "type": "string",
+          "x-go-name": "Token"
+        },
+        "value": {
+          "description": "Value of the challenge",
+          "type": "string",
+          "x-go-name": "Value"
+        }
+      },
+      "x-go-name": "Challenge",
+      "x-go-package": "LEAuthorizationServer/models"
+    }
+  },
+  "responses": {
+    "challengeResponse": {
+      "description": "ChallengeResponse contains a single challenge information",
+      "schema": {
+        "$ref": "#/definitions/challenge"
+      }
+    },
+    "challengeValueResponse": {
+      "description": "ChallengeValueResponse contains a single challenge value string information"
+    },
+    "challengesResponse": {
+      "description": "ChallengesResponse contains all challengese from database information",
+      "schema": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/challenge"
+        }
+      }
+    },
+    "jsonError": {
+      "description": "JsonError is a generic error in JSON format"
+    }
+  }
+}

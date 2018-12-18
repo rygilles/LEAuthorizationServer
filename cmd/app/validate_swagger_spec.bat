@@ -1,0 +1,1 @@
+swagger validate ../../swagger-api/swagger.json

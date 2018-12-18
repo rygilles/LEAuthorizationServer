@@ -1,0 +1,1 @@
+swagger serve --flavor=swagger --port=6060 ../../swagger-api/swagger.json
