@@ -13,6 +13,15 @@ Builds directory contains the latest binaries for different OS/Arch :
 - Linux 32 bits : [lin386_server](builds/lin386_server)
 - Linux 64 bits : [lin64_server](builds/lin64_server)
 
+## Configuration ##
+
+The server default port is `80` but you can provide another configuration
+by putting a [`.env`](cmd/app/.env) file on the same directory of the binary.
+
+```
+PORT=81
+```
+
 ## OpenAPI / Swagger specs ##
 
 Check this [file](swagger-api/swagger.json) for API specifications.

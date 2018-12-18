@@ -24,8 +24,10 @@
 package main
 
 import (
+	"github.com/joho/godotenv"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/rs/cors"
 
@@ -40,9 +42,20 @@ func setupGlobalMiddleware(handler http.Handler) http.Handler {
 
 // our main function
 func main() {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
+	port := os.Getenv("PORT")
+
+	if port == "" {
+		port = "80"
+	}
+
 	// create router and start listen on port 8000
 	router := router.NewRouter()
-	log.Fatal(http.ListenAndServe(":80", setupGlobalMiddleware(router)))
+	log.Fatal(http.ListenAndServe(":" + port, setupGlobalMiddleware(router)))
 
 	// @todo Serve HTTPS
 	//log.Fatal(http.ListenAndServeTLS(":8001", "cert.pem", "key.pem", setupGlobalMiddleware(router)))
