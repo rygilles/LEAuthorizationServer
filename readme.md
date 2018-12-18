@@ -4,6 +4,15 @@ A simple HTTP Api for Let's Encrypt challenge validation with `http-01` type, wr
 
 **For tests purpose only, Api HTTP routes are not secured !**
 
+## Builds ##
+
+Builds directory contains the latest binaries for different OS/Arch :
+
+- Windows 32 bits : [win386_server.exe](builds/win386_server.exe)
+- Windows 64 bits : [win64_server.exe](builds/win64_server.exe)
+- Linux 32 bits : [lin386_server](builds/lin386_server)
+- Linux 64 bits : [lin64_server](builds/lin64_server)
+
 ## OpenAPI / Swagger specs ##
 
 Check this [file](swagger-api/swagger.json) for API specifications.
