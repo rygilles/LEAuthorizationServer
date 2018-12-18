@@ -7,11 +7,11 @@
 // there are no TOS at this moment, use at your own risk we take no responsibility
 //
 //     Schemes: http, https
-//     Host: localhost:8000
+//     Host: localhost:80
 //     BasePath: /
 //     Version: 0.0.1
 //     License: MIT http://opensource.org/licenses/MIT
-//     Contact: Ryan Gilles <ryan@e-monsite.com>
+//     Contact: Ryan Gilles <gilles.ryan.dev@gmail.com>
 //
 //     Consumes:
 //     - application/json
