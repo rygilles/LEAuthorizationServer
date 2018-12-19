@@ -73,5 +73,5 @@ curl -X GET "http://domain.tld/.well-known/acme-challenge/{token}" \
 
 ## *TODO* ##
 
-- Builds for Linux and Windows.
+- ~~Builds for Linux and Windows.~~
 - Handle certificates to serve with TLS HTTPS end-point.
